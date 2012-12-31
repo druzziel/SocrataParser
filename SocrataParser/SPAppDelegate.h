@@ -7,27 +7,15 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "SPSocrataDataProvider.h"
 
-@interface SPAppDelegate : NSObject <NSApplicationDelegate>
+@interface SPAppDelegate : NSObject <NSApplicationDelegate,SPSocrataDataProviderDelegate>
 
 @property (assign) IBOutlet NSWindow *window;
 @property (assign) IBOutlet NSTextField *dataURLBox;
-@property (assign) IBOutlet NSTextField *columnsURLBox;
-@property (assign) IBOutlet NSTextField *rowsURLBox;
-@property (nonatomic, strong) NSDictionary *rawDict;
-@property (nonatomic, strong) NSArray *rows;
-@property (nonatomic, strong) NSArray *columns;
-@property (nonatomic, strong) NSNumber *metadataColumnCount;
+@property (assign) IBOutlet NSTextView *outputTextView;
 
 - (IBAction)fetchIt:(id)sender;
-- (NSString *)stringForJSONURL;
-- (NSString *)stringForJSONColumnsURL;
-- (IBAction)fetchColumns:(id)sender;
-- (IBAction)fetchRows:(id)sender;
-- (IBAction)fetchMetadataCount:(id)sender;
-+ (void)exploreDatabase:(NSDictionary *)database;
-+ (void)exploreColumns:(NSArray *)database;
-+(NSNumber *)numberOfMetadataColumns:(NSArray *)database;
 
 
 @end

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5D65F02A16910B32001D5971 /* SPSocrataDataProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D65F02916910B32001D5971 /* SPSocrataDataProvider.m */; };
 		5DAE38F716782CD70079AA6A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DAE38F616782CD70079AA6A /* Cocoa.framework */; };
 		5DAE390116782CD80079AA6A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5DAE38FF16782CD80079AA6A /* InfoPlist.strings */; };
 		5DAE390316782CD80079AA6A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DAE390216782CD80079AA6A /* main.m */; };
@@ -16,6 +17,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5D65F02816910B32001D5971 /* SPSocrataDataProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPSocrataDataProvider.h; sourceTree = "<group>"; };
+		5D65F02916910B32001D5971 /* SPSocrataDataProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPSocrataDataProvider.m; sourceTree = "<group>"; };
 		5DAE38F216782CD70079AA6A /* SocrataParser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SocrataParser.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5DAE38F616782CD70079AA6A /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		5DAE38F916782CD70079AA6A /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -84,6 +87,8 @@
 			children = (
 				5DAE390816782CD80079AA6A /* SPAppDelegate.h */,
 				5DAE390916782CD80079AA6A /* SPAppDelegate.m */,
+				5D65F02816910B32001D5971 /* SPSocrataDataProvider.h */,
+				5D65F02916910B32001D5971 /* SPSocrataDataProvider.m */,
 				5DAE390B16782CD80079AA6A /* MainMenu.xib */,
 				5DAE38FD16782CD80079AA6A /* Supporting Files */,
 			);
@@ -169,6 +174,7 @@
 			files = (
 				5DAE390316782CD80079AA6A /* main.m in Sources */,
 				5DAE390A16782CD80079AA6A /* SPAppDelegate.m in Sources */,
+				5D65F02A16910B32001D5971 /* SPSocrataDataProvider.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,6 +302,7 @@
 				5DAE391216782CD80079AA6A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
