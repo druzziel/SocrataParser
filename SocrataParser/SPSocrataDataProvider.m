@@ -13,23 +13,28 @@
 -(SPSocrataDataProvider *)initWithDataSetString:(NSString *)dataSetString
 {
     [super init];
-    self.dataSetString = dataSetString;
+    _dataSetString = dataSetString;
     return self;
 }
 
 
 - (NSString *)stringForJSONURL
 {
-    NSString *url = [NSString stringWithFormat:@"https://data.seattle.gov/api/views/%@/rows.json?max_rows=5",self.dataSetString];
+    NSString *url = [NSString stringWithFormat:@"https://data.seattle.gov/api/views/%@/rows.json",self.dataSetString];
     return url;
     
 }
 
--(void)fetchData
+-(void)fetchData:(int)maxRows
 {
     // Retrieve a JSON dictionary object which contains column information and data rows
     // and store it in self.rawDict
-    NSData *inputData = [NSData dataWithContentsOfURL:[NSURL URLWithString:[self stringForJSONURL]]];
+    int rowsToFetch = 5;
+    if (maxRows) {
+        rowsToFetch = maxRows;
+    }
+    NSString *socrataURL = [NSString stringWithFormat:@"%@?max_rows=%d", [self stringForJSONURL], rowsToFetch];
+    NSData *inputData = [NSData dataWithContentsOfURL:[NSURL URLWithString:socrataURL]];
     NSDictionary *database;
     NSError *error;
     database = [NSJSONSerialization
@@ -68,7 +73,7 @@
             //TODO:this is an invalid assumption: the first column's position may not == 1.
             // we need to add each colDict to the colsArray and then sort colsArray by position.
             //[colsArray insertObject:colDict atIndex:position.integerValue-1];
-            [colsArray addObject:colDict];
+            [colsArray addObject:colDict[@"name"]];
         }
     }
     
@@ -92,8 +97,10 @@
         for (int i = metaDataColumns; i < numberOfColumnsInRow + metaDataColumns; i++) {
             [aRow addObject:rowArray[i]];
         }
-        [rowsArray addObject:[aRow copy] ];
+        NSDictionary *x = [NSDictionary dictionaryWithObjects:aRow forKeys:self.columns];
         [aRow removeAllObjects];
+        [rowsArray addObject:x];
+    
     }
     self.rows = nil;
     self.rows = rowsArray;
