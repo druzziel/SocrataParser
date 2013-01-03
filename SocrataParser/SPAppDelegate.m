@@ -33,9 +33,9 @@
     
     socrataDataProvider.delegate = self;
     
-    [socrataDataProvider fetchData:5];
+    [socrataDataProvider fetchData:25];
     
-    NSMutableString *outputString = [[NSMutableString alloc] init];
+    NSMutableString *outputString = nil;
 
 //    for (id columnHeader in socrataDataProvider.columns) {
 //        outputString = [NSString stringWithFormat:@"%@\t", columnHeader[@"name"]];

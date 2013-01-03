@@ -12,7 +12,7 @@
 
 -(SPSocrataDataProvider *)initWithDataSetString:(NSString *)dataSetString
 {
-    [super init];
+    self = [super init];
     _dataSetString = dataSetString;
     return self;
 }
@@ -97,7 +97,7 @@
         for (int i = metaDataColumns; i < numberOfColumnsInRow + metaDataColumns; i++) {
             [aRow addObject:rowArray[i]];
         }
-        NSDictionary *x = [NSDictionary dictionaryWithObjects:aRow forKeys:self.columns];
+        NSDictionary *x = [[NSDictionary dictionaryWithObjects:aRow forKeys:self.columns] autorelease];
         [aRow removeAllObjects];
         [rowsArray addObject:x];
     
@@ -109,6 +109,9 @@
         [self.delegate socrataDataProvider:self didFinishProcessingData:TRUE];
     }
 
+    // we're done parsing our rawDict data now, so we can let it go.
+    self.rawDict = nil;
+    
 }
 
 
