@@ -46,11 +46,11 @@
     if ( [ self.delegate respondsToSelector:@selector(socrataDataProvider:didFinishDownloadingData:) ] ) {
         [self.delegate socrataDataProvider:self didFinishDownloadingData:TRUE];
     }
-    [self loadColumnData];
-    [self loadRowData];
+    [self parseColumnHeaders];
+    [self parseRows];
 }
 
--(void)loadColumnData
+-(void)parseColumnHeaders
 {
     self.columns = self.rawDict[@"meta"][@"view"][@"columns"];
     int metaDataCount = 0;
@@ -83,9 +83,10 @@
     
 }
 
--(void)loadRowData
+-(void)parseRows
 {
-    // return the row information from the JSON data
+    // translate the JSON row data
+    // into an array of dictionaries
     self.rows = self.rawDict[@"data"];
     NSMutableArray *rowsArray = [NSMutableArray arrayWithCapacity:self.rows.count];
     NSArray *firstRow = self.rows[0];
