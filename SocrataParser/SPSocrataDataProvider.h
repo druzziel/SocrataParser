@@ -27,7 +27,7 @@
 
 -(SPSocrataDataProvider *)initWithDataSetString:(NSString *)dataSetString;
 - (NSString *)stringForJSONURL;
--(void)fetchData:(int)maxRows;
+-(void)fetchData:(NSNumber *)maxRows;
 
 @property (nonatomic, strong) NSString *dataSetString;
 @property (nonatomic, strong) NSDictionary *rawDict;

@@ -25,11 +25,11 @@
     
 }
 
--(void)fetchData:(int)maxRows
+-(void)fetchData:(NSNumber *)maxRows
 {
     // Retrieve a JSON dictionary object which contains column information and data rows
     // and store it in self.rawDict
-    int rowsToFetch = 5;
+    NSNumber *rowsToFetch = [NSNumber numberWithInt:5];
     if (maxRows) {
         rowsToFetch = maxRows;
     }
@@ -98,7 +98,7 @@
         for (int i = metaDataColumns; i < numberOfColumnsInRow + metaDataColumns; i++) {
             [aRow addObject:rowArray[i]];
         }
-        NSDictionary *x = [[NSDictionary dictionaryWithObjects:aRow forKeys:self.columns] autorelease];
+        NSDictionary *x = [NSDictionary dictionaryWithObjects:aRow forKeys:self.columns];
         [aRow removeAllObjects];
         [rowsArray addObject:x];
     
