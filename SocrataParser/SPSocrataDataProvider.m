@@ -33,7 +33,7 @@
     if (maxRows) {
         rowsToFetch = maxRows;
     }
-    NSString *socrataURL = [NSString stringWithFormat:@"%@?max_rows=%d", [self stringForJSONURL], rowsToFetch];
+    NSString *socrataURL = [NSString stringWithFormat:@"%@?max_rows=%@", [self stringForJSONURL], rowsToFetch];
     NSData *inputData = [NSData dataWithContentsOfURL:[NSURL URLWithString:socrataURL]];
     NSDictionary *database;
     NSError *error;

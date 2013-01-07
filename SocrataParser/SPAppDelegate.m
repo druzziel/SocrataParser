@@ -33,7 +33,7 @@
     
     socrataDataProvider.delegate = self;
     
-    [socrataDataProvider fetchData:25];
+    [socrataDataProvider fetchData:[NSNumber numberWithInt:25]];
     
     NSMutableString *outputString = nil;
 
