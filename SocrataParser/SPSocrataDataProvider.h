@@ -28,6 +28,13 @@
 -(SPSocrataDataProvider *)initWithDataSetString:(NSString *)dataSetString;
 - (NSString *)stringForJSONURL;
 -(void)fetchData:(NSNumber *)maxRows;
++(SPSocrataDataProvider *)parserWithFileName:(NSString *)filepath;
++(SPSocrataDataProvider *)parserWithString:(NSString *)data;
++(SPSocrataDataProvider *)parserWithData:(NSData *)data;
+
+//+URLStringForServer:dataset:
+//+URLStringForServer:dataset:maxRows:
+//+URLStringForServer:dataset:modifiedSince:
 
 @property (nonatomic, strong) NSString *dataSetString;
 @property (nonatomic, strong) NSDictionary *rawDict;

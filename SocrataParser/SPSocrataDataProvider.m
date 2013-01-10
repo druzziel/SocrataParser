@@ -35,22 +35,49 @@
     }
     NSString *socrataURL = [NSString stringWithFormat:@"%@?max_rows=%@", [self stringForJSONURL], rowsToFetch];
     NSData *inputData = [NSData dataWithContentsOfURL:[NSURL URLWithString:socrataURL]];
-    NSDictionary *database;
-    NSError *error;
-    database = [NSJSONSerialization
-                JSONObjectWithData:inputData
-                options:kNilOptions
-                error:&error];
-    self.rawDict = database;
+
+    SPSocrataDataProvider *result = [SPSocrataDataProvider parserWithData:inputData];
+    
+    self.rawDict = result.rawDict;
     
     if ( [ self.delegate respondsToSelector:@selector(socrataDataProvider:didFinishDownloadingData:) ] ) {
         [self.delegate socrataDataProvider:self didFinishDownloadingData:TRUE];
     }
-    [self parseColumnHeaders];
-    [self parseRows];
+    [self parseMetadata];
+    [self parseDataElements];
 }
 
--(void)parseColumnHeaders
++(SPSocrataDataProvider *)parserWithFileName:(NSString *)filepath
+{
+    
+    
+    NSURL *myURL = [[NSBundle mainBundle] URLForResource:filepath withExtension:@"json"];
+    NSData *inputData = [NSData dataWithContentsOfURL:myURL];
+
+    SPSocrataDataProvider *result = [SPSocrataDataProvider parserWithData:inputData];
+    [result parseMetadata];
+    [result parseDataElements];
+
+    return result;
+}
+
+//TODO: create +parserWithData:(NSData *)data
+
++(SPSocrataDataProvider *)parserWithData:(NSData *)data
+{
+    NSDictionary *database;
+    NSError *error;
+    database = [NSJSONSerialization
+                JSONObjectWithData:data
+                options:kNilOptions
+                error:&error];
+    SPSocrataDataProvider *result = [[[SPSocrataDataProvider alloc] init] autorelease];
+    result.rawDict = database;
+    
+    return result;
+}
+
+-(void)parseMetadata
 {
     self.columns = self.rawDict[@"meta"][@"view"][@"columns"];
     int metaDataCount = 0;
@@ -83,7 +110,7 @@
     
 }
 
--(void)parseRows
+-(void)parseDataElements
 {
     // translate the JSON row data
     // into an array of dictionaries
@@ -115,5 +142,10 @@
     
 }
 
++parserWithString:(NSString *)data
+{
+    // do stuff
+    return [[SPSocrataDataProvider alloc] init];
+}
 
 @end

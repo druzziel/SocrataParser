@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5D5413D2169D24A100EFFC76 /* SPSocrataDataProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D65F02916910B32001D5971 /* SPSocrataDataProvider.m */; };
+		5D5413D6169D2D9300EFFC76 /* seattle_code_violations.json in Resources */ = {isa = PBXBuildFile; fileRef = 5D5413D4169D2D8900EFFC76 /* seattle_code_violations.json */; };
+		5D5413D8169D2DA600EFFC76 /* austin_restaurants.json in Resources */ = {isa = PBXBuildFile; fileRef = 5D5413D7169D2DA600EFFC76 /* austin_restaurants.json */; };
+		5D5413DA169D2DB000EFFC76 /* ny_wifi_hotspots.json in Resources */ = {isa = PBXBuildFile; fileRef = 5D5413D9169D2DB000EFFC76 /* ny_wifi_hotspots.json */; };
 		5D65F02A16910B32001D5971 /* SPSocrataDataProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D65F02916910B32001D5971 /* SPSocrataDataProvider.m */; };
 		5DAE38F716782CD70079AA6A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DAE38F616782CD70079AA6A /* Cocoa.framework */; };
 		5DAE390116782CD80079AA6A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5DAE38FF16782CD80079AA6A /* InfoPlist.strings */; };
@@ -14,9 +18,16 @@
 		5DAE390716782CD80079AA6A /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 5DAE390516782CD80079AA6A /* Credits.rtf */; };
 		5DAE390A16782CD80079AA6A /* SPAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DAE390916782CD80079AA6A /* SPAppDelegate.m */; };
 		5DAE390D16782CD80079AA6A /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5DAE390B16782CD80079AA6A /* MainMenu.xib */; };
+		5DAF7217169A92F200D64EA4 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DAF7216169A92F200D64EA4 /* SenTestingKit.framework */; };
+		5DAF7218169A92F200D64EA4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DAE38F616782CD70079AA6A /* Cocoa.framework */; };
+		5DAF721E169A92FE00D64EA4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5DAF721C169A92FE00D64EA4 /* InfoPlist.strings */; };
+		5DAF7221169A92FE00D64EA4 /* SocrataParserTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DAF7220169A92FE00D64EA4 /* SocrataParserTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5D5413D4169D2D8900EFFC76 /* seattle_code_violations.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = seattle_code_violations.json; path = ../SocrataParser/seattle_code_violations.json; sourceTree = "<group>"; };
+		5D5413D7169D2DA600EFFC76 /* austin_restaurants.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = austin_restaurants.json; path = ../SocrataParser/austin_restaurants.json; sourceTree = "<group>"; };
+		5D5413D9169D2DB000EFFC76 /* ny_wifi_hotspots.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = ny_wifi_hotspots.json; path = ../SocrataParser/ny_wifi_hotspots.json; sourceTree = "<group>"; };
 		5D65F02816910B32001D5971 /* SPSocrataDataProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPSocrataDataProvider.h; sourceTree = "<group>"; };
 		5D65F02916910B32001D5971 /* SPSocrataDataProvider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPSocrataDataProvider.m; sourceTree = "<group>"; };
 		5DAE38F216782CD70079AA6A /* SocrataParser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SocrataParser.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -32,6 +43,13 @@
 		5DAE390816782CD80079AA6A /* SPAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SPAppDelegate.h; sourceTree = "<group>"; };
 		5DAE390916782CD80079AA6A /* SPAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SPAppDelegate.m; sourceTree = "<group>"; };
 		5DAE390C16782CD80079AA6A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		5DAF7215169A92F200D64EA4 /* SocrataParserTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SocrataParserTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5DAF7216169A92F200D64EA4 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		5DAF721B169A92F200D64EA4 /* SocrataParserTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SocrataParserTests-Info.plist"; sourceTree = "<group>"; };
+		5DAF721D169A92FE00D64EA4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		5DAF721F169A92FE00D64EA4 /* SocrataParserTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SocrataParserTests.h; sourceTree = "<group>"; };
+		5DAF7220169A92FE00D64EA4 /* SocrataParserTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SocrataParserTests.m; sourceTree = "<group>"; };
+		5DAF7222169A92FE00D64EA4 /* SocrataParserTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SocrataParserTests-Prefix.pch"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +61,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		5DAF7211169A92F200D64EA4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5DAF7217169A92F200D64EA4 /* SenTestingKit.framework in Frameworks */,
+				5DAF7218169A92F200D64EA4 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -50,6 +77,7 @@
 			isa = PBXGroup;
 			children = (
 				5DAE38FC16782CD70079AA6A /* SocrataParser */,
+				5DAF7219169A92F200D64EA4 /* SocrataParserTests */,
 				5DAE38F516782CD70079AA6A /* Frameworks */,
 				5DAE38F316782CD70079AA6A /* Products */,
 			);
@@ -59,6 +87,7 @@
 			isa = PBXGroup;
 			children = (
 				5DAE38F216782CD70079AA6A /* SocrataParser.app */,
+				5DAF7215169A92F200D64EA4 /* SocrataParserTests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -67,6 +96,7 @@
 			isa = PBXGroup;
 			children = (
 				5DAE38F616782CD70079AA6A /* Cocoa.framework */,
+				5DAF7216169A92F200D64EA4 /* SenTestingKit.framework */,
 				5DAE38F816782CD70079AA6A /* Other Frameworks */,
 			);
 			name = Frameworks;
@@ -107,6 +137,29 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		5DAF7219169A92F200D64EA4 /* SocrataParserTests */ = {
+			isa = PBXGroup;
+			children = (
+				5D5413D4169D2D8900EFFC76 /* seattle_code_violations.json */,
+				5D5413D7169D2DA600EFFC76 /* austin_restaurants.json */,
+				5D5413D9169D2DB000EFFC76 /* ny_wifi_hotspots.json */,
+				5DAF721F169A92FE00D64EA4 /* SocrataParserTests.h */,
+				5DAF7220169A92FE00D64EA4 /* SocrataParserTests.m */,
+				5DAF721A169A92F200D64EA4 /* Supporting Files */,
+			);
+			path = SocrataParserTests;
+			sourceTree = "<group>";
+		};
+		5DAF721A169A92F200D64EA4 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				5DAF721B169A92F200D64EA4 /* SocrataParserTests-Info.plist */,
+				5DAF721C169A92FE00D64EA4 /* InfoPlist.strings */,
+				5DAF7222169A92FE00D64EA4 /* SocrataParserTests-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -126,6 +179,24 @@
 			productName = SocrataParser;
 			productReference = 5DAE38F216782CD70079AA6A /* SocrataParser.app */;
 			productType = "com.apple.product-type.application";
+		};
+		5DAF7214169A92F200D64EA4 /* SocrataParserTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5DAF7225169A92FE00D64EA4 /* Build configuration list for PBXNativeTarget "SocrataParserTests" */;
+			buildPhases = (
+				5DAF7210169A92F200D64EA4 /* Sources */,
+				5DAF7211169A92F200D64EA4 /* Frameworks */,
+				5DAF7212169A92F200D64EA4 /* Resources */,
+				5DAF7213169A92F200D64EA4 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SocrataParserTests;
+			productName = SocrataParserTests;
+			productReference = 5DAF7215169A92F200D64EA4 /* SocrataParserTests.octest */;
+			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
 
@@ -150,6 +221,7 @@
 			projectRoot = "";
 			targets = (
 				5DAE38F116782CD70079AA6A /* SocrataParser */,
+				5DAF7214169A92F200D64EA4 /* SocrataParserTests */,
 			);
 		};
 /* End PBXProject section */
@@ -165,7 +237,34 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		5DAF7212169A92F200D64EA4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5DAF721E169A92FE00D64EA4 /* InfoPlist.strings in Resources */,
+				5D5413D6169D2D9300EFFC76 /* seattle_code_violations.json in Resources */,
+				5D5413D8169D2DA600EFFC76 /* austin_restaurants.json in Resources */,
+				5D5413DA169D2DB000EFFC76 /* ny_wifi_hotspots.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5DAF7213169A92F200D64EA4 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		5DAE38EE16782CD70079AA6A /* Sources */ = {
@@ -175,6 +274,15 @@
 				5DAE390316782CD80079AA6A /* main.m in Sources */,
 				5DAE390A16782CD80079AA6A /* SPAppDelegate.m in Sources */,
 				5D65F02A16910B32001D5971 /* SPSocrataDataProvider.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5DAF7210169A92F200D64EA4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5DAF7221169A92FE00D64EA4 /* SocrataParserTests.m in Sources */,
+				5D5413D2169D24A100EFFC76 /* SPSocrataDataProvider.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -203,6 +311,14 @@
 				5DAE390C16782CD80079AA6A /* en */,
 			);
 			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		5DAF721C169A92FE00D64EA4 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5DAF721D169A92FE00D64EA4 /* en */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -283,6 +399,32 @@
 			};
 			name = Release;
 		};
+		5DAF7223169A92FE00D64EA4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = "\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SocrataParserTests/SocrataParserTests-Prefix.pch";
+				INFOPLIST_FILE = "SocrataParserTests/SocrataParserTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		5DAF7224169A92FE00D64EA4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = "\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SocrataParserTests/SocrataParserTests-Prefix.pch";
+				INFOPLIST_FILE = "SocrataParserTests/SocrataParserTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -300,6 +442,15 @@
 			buildConfigurations = (
 				5DAE391116782CD80079AA6A /* Debug */,
 				5DAE391216782CD80079AA6A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5DAF7225169A92FE00D64EA4 /* Build configuration list for PBXNativeTarget "SocrataParserTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5DAF7223169A92FE00D64EA4 /* Debug */,
+				5DAF7224169A92FE00D64EA4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
