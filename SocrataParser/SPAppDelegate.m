@@ -28,13 +28,14 @@
 - (IBAction)fetchIt:(id)sender
 {
 
-    SPSocrataDataProvider *socrataDataProvider = [[SPSocrataDataProvider alloc]
-                                                  initWithDataSetString:[self.dataURLBox stringValue]];
+    SPSocrataDataProvider *socrataDataProvider = [SPSocrataDataProvider parserWithDataSetString:[self.dataURLBox stringValue]];
     
     socrataDataProvider.delegate = self;
     
-    [socrataDataProvider fetchData:[NSNumber numberWithInt:25]];
+    NSNumber *rowsToFetch = (NSNumber *)self.numRowsBox.stringValue;
     
+    [socrataDataProvider fetchData:rowsToFetch];
+        
     NSMutableString *outputString = nil;
 
 //    for (id columnHeader in socrataDataProvider.columns) {

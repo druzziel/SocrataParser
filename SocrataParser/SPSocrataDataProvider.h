@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <dispatch/dispatch.h>
 
 @class SPSocrataDataProvider;
 
@@ -25,9 +26,10 @@
 
 @interface SPSocrataDataProvider : NSObject
 
--(SPSocrataDataProvider *)initWithDataSetString:(NSString *)dataSetString;
 - (NSString *)stringForJSONURL;
 -(void)fetchData:(NSNumber *)maxRows;
+-(NSString *)columnNameAtPosition:(NSInteger)position;
++(SPSocrataDataProvider *)parserWithDataSetString:(NSString *)dataSetString;
 +(SPSocrataDataProvider *)parserWithFileName:(NSString *)filepath;
 +(SPSocrataDataProvider *)parserWithString:(NSString *)data;
 +(SPSocrataDataProvider *)parserWithData:(NSData *)data;
@@ -39,7 +41,7 @@
 @property (nonatomic, strong) NSString *dataSetString;
 @property (nonatomic, strong) NSDictionary *rawDict;
 @property (nonatomic, strong) NSArray *rows;
-@property (nonatomic, strong) NSArray *columns;
+@property (nonatomic, strong) NSDictionary *columns;
 @property (nonatomic, strong) NSNumber *metadataColumnCount;
 @property (nonatomic, strong) id delegate;
 

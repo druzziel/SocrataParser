@@ -14,6 +14,7 @@
 @property (assign) IBOutlet NSWindow *window;
 @property (assign) IBOutlet NSTextField *dataURLBox;
 @property (assign) IBOutlet NSTextView *outputTextView;
+@property (assign) IBOutlet NSTextField *numRowsBox;
 
 - (IBAction)fetchIt:(id)sender;
 

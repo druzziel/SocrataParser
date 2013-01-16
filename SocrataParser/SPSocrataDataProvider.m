@@ -10,13 +10,6 @@
 
 @implementation SPSocrataDataProvider
 
--(SPSocrataDataProvider *)initWithDataSetString:(NSString *)dataSetString
-{
-    self = [super init];
-    _dataSetString = dataSetString;
-    return self;
-}
-
 
 - (NSString *)stringForJSONURL
 {
@@ -47,66 +40,37 @@
     [self parseDataElements];
 }
 
-+(SPSocrataDataProvider *)parserWithFileName:(NSString *)filepath
-{
-    
-    
-    NSURL *myURL = [[NSBundle mainBundle] URLForResource:filepath withExtension:@"json"];
-    NSData *inputData = [NSData dataWithContentsOfURL:myURL];
-
-    SPSocrataDataProvider *result = [SPSocrataDataProvider parserWithData:inputData];
-    [result parseMetadata];
-    [result parseDataElements];
-
-    return result;
-}
-
-//TODO: create +parserWithData:(NSData *)data
-
-+(SPSocrataDataProvider *)parserWithData:(NSData *)data
-{
-    NSDictionary *database;
-    NSError *error;
-    database = [NSJSONSerialization
-                JSONObjectWithData:data
-                options:kNilOptions
-                error:&error];
-    SPSocrataDataProvider *result = [[[SPSocrataDataProvider alloc] init] autorelease];
-    result.rawDict = database;
-    
-    return result;
-}
 
 -(void)parseMetadata
 {
-    self.columns = self.rawDict[@"meta"][@"view"][@"columns"];
+    // self.rawDict[@"meta"][@"view"][@"columns"] is an array of dictionaries
+    // each dict has a "name" key that we'll use for the key in self.columns
+    NSArray *tmpColumns = self.rawDict[@"meta"][@"view"][@"columns"];
     int metaDataCount = 0;
     NSNumber *zero = [NSNumber numberWithInt:0];
-    for (NSDictionary *colDict in self.columns) {
+    for (NSDictionary *colDict in tmpColumns) {
         NSNumber *position = colDict[@"position"];
         if ([position isEqualToNumber:zero]) {
             metaDataCount++;
         }
     }
-    
-    //NSLog(@"metadata count = %d", metaDataCount);
-    
+        
     self.metadataColumnCount = [NSNumber numberWithInt:metaDataCount];
-    
-    NSMutableArray *colsArray = [[NSMutableArray alloc] initWithCapacity:(self.columns.count) - metaDataCount];
-    for (NSDictionary *colDict in self.columns) {
+        
+    NSMutableDictionary *colsDictionary = [[NSMutableDictionary alloc] initWithCapacity:([tmpColumns count]) - metaDataCount];
+    for (NSDictionary *colDict in tmpColumns) {
         NSNumber *position = colDict[@"position"];
         if (![position isEqualToNumber:zero]) {
             //TODO:this is an invalid assumption: the first column's position may not == 1.
             // we need to add each colDict to the colsArray and then sort colsArray by position.
             //[colsArray insertObject:colDict atIndex:position.integerValue-1];
-            [colsArray addObject:colDict[@"name"]];
+            colsDictionary[colDict[@"name"]] = colDict;
         }
     }
     
-    self.columns = colsArray;
-    //NSLog(@"columns = %@", colsArray);
-    [colsArray release];
+    self.columns = colsDictionary;
+    
+    [colsDictionary release];
     
 }
 
@@ -115,17 +79,31 @@
     // translate the JSON row data
     // into an array of dictionaries
     self.rows = self.rawDict[@"data"];
-    NSMutableArray *rowsArray = [NSMutableArray arrayWithCapacity:self.rows.count];
+    NSMutableArray *rowsArray = [NSMutableArray arrayWithCapacity:[self.rows count]];
     NSArray *firstRow = self.rows[0];
     int metaDataColumns = [self.metadataColumnCount intValue];
     int numberOfColumnsInRow = (int)firstRow.count - metaDataColumns;
     NSMutableArray *aRow = [NSMutableArray arrayWithCapacity:numberOfColumnsInRow];
-    
+
     for (NSArray *rowArray in self.rows) {
+        
         for (int i = metaDataColumns; i < numberOfColumnsInRow + metaDataColumns; i++) {
             [aRow addObject:rowArray[i]];
         }
-        NSDictionary *x = [NSDictionary dictionaryWithObjects:aRow forKeys:self.columns];
+
+        // resolve the position of the elements in aRow with the 'position'
+        // wow, Socrata are bastards.  'position' can be non-contiguous:
+        // for kzjm-xkqj (real-time 911 calls), the positions are
+        // 1, 3, 4, 5, 6, 7, 8.  There is no column 2.
+        // so, what we need to do here is have the columns ordered as they are in the
+        // Socrata JSON results and just pair each column with the row data in order
+        NSMutableDictionary *x = [[[NSMutableDictionary alloc] init] autorelease];
+        NSArray *columnsByPosition = [self columnsByPosition];
+        for (NSInteger i = 0; i < [aRow count]; i++) {
+            NSString *colName = columnsByPosition[i][@"name"];
+            [x setObject:aRow[i] forKey:colName];
+        }
+        
         [aRow removeAllObjects];
         [rowsArray addObject:x];
     
@@ -142,10 +120,79 @@
     
 }
 
+-(NSString *)columnNameAtPosition:(NSInteger)position
+{
+    for (NSString *name in self.columns) {
+        NSDictionary *colValues = self.columns[name];
+        if (position == [colValues[@"position"] integerValue])
+            return name;
+        else
+            NSLog(@"Returning nil because %lu != %@", position, colValues[@"position"]);
+    }
+    return nil;
+}
+
+-(NSArray *)columnsByPosition
+{
+    NSSortDescriptor *descriptor = [[[NSSortDescriptor alloc] initWithKey:@"position"  ascending:YES] autorelease];
+    NSArray *colsArray = [NSArray arrayWithArray:[self.columns allValues]];
+    NSArray *result = [colsArray sortedArrayUsingDescriptors:[NSArray arrayWithObjects:descriptor,nil]];
+
+    return result;
+}
+
+#pragma mark Initializers
+
 +parserWithString:(NSString *)data
 {
     // do stuff
     return [[SPSocrataDataProvider alloc] init];
+}
+
+//
+// return a parser by fetching the specified data set
+// over the network
+//
++(SPSocrataDataProvider *)parserWithDataSetString:(NSString *)dataSetString
+{
+    SPSocrataDataProvider *result = [[[SPSocrataDataProvider alloc] init] autorelease];
+    result.dataSetString = dataSetString;
+    return result;
+}
+
+//
+// return a parser by loading JSON data from a local file
+//
++(SPSocrataDataProvider *)parserWithFileName:(NSString *)filepath
+{
+    
+    
+    NSURL *myURL = [[NSBundle mainBundle] URLForResource:filepath withExtension:@"json"];
+    NSData *inputData = [NSData dataWithContentsOfURL:myURL];
+    
+    SPSocrataDataProvider *result = [SPSocrataDataProvider parserWithData:inputData];
+    [result parseMetadata];
+    [result parseDataElements];
+    
+    return result;
+}
+
+//
+// This is the core factory method.  It converts the JSON data into a dictionary
+// and makes it available for later parsing by parseMetaData and parseDataElements
+//
++(SPSocrataDataProvider *)parserWithData:(NSData *)data
+{
+    NSDictionary *database;
+    NSError *error;
+    database = [NSJSONSerialization
+                JSONObjectWithData:data
+                options:kNilOptions
+                error:&error];
+    SPSocrataDataProvider *result = [[[SPSocrataDataProvider alloc] init] autorelease];
+    result.rawDict = database;
+    
+    return result;
 }
 
 @end

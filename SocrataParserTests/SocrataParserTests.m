@@ -27,7 +27,7 @@
 
 -(void)testSPSocrataDataProvider
 {
-    SPSocrataDataProvider *myProvider = [[SPSocrataDataProvider alloc] initWithDataSetString:@"aaaa-yyyy"];
+    SPSocrataDataProvider *myProvider = [SPSocrataDataProvider parserWithDataSetString:@"aaaa-yyyy"];
     STAssertTrue([myProvider isKindOfClass:[SPSocrataDataProvider class]], @"myProvider is a SPSocrataDataProvider");
     
 }
@@ -38,6 +38,28 @@
     NSURL *myURL = [bundle URLForResource:@"ny_wifi_hotspots" withExtension:@"json"];
     NSData *inputData = [NSData dataWithContentsOfURL:myURL];
 
+    SPSocrataDataProvider *nycProvider = [SPSocrataDataProvider parserWithData:inputData];
+    STAssertTrue([nycProvider isKindOfClass:[SPSocrataDataProvider class]], @"nycProvider should be a SPSocrataDataProvider");
+    
+}
+
+-(void)testLoadAustinData
+{
+    NSBundle *bundle = [NSBundle bundleForClass:[self class]];
+    NSURL *myURL = [bundle URLForResource:@"austin_restaurants" withExtension:@"json"];
+    NSData *inputData = [NSData dataWithContentsOfURL:myURL];
+    
+    SPSocrataDataProvider *nycProvider = [SPSocrataDataProvider parserWithData:inputData];
+    STAssertTrue([nycProvider isKindOfClass:[SPSocrataDataProvider class]], @"nycProvider should be a SPSocrataDataProvider");
+    
+}
+
+-(void)testLoadSeattleData
+{
+    NSBundle *bundle = [NSBundle bundleForClass:[self class]];
+    NSURL *myURL = [bundle URLForResource:@"seattle_code_violations" withExtension:@"json"];
+    NSData *inputData = [NSData dataWithContentsOfURL:myURL];
+    
     SPSocrataDataProvider *nycProvider = [SPSocrataDataProvider parserWithData:inputData];
     STAssertTrue([nycProvider isKindOfClass:[SPSocrataDataProvider class]], @"nycProvider should be a SPSocrataDataProvider");
     
