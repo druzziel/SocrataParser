@@ -26,9 +26,9 @@
 
 @interface SPSocrataDataProvider : NSObject
 
-- (NSString *)stringForJSONURL;
 -(void)fetchData:(NSNumber *)maxRows;
 -(NSString *)columnNameAtPosition:(NSInteger)position;
+-(NSArray *)columnsByPosition;
 +(SPSocrataDataProvider *)parserWithDataSetString:(NSString *)dataSetString;
 +(SPSocrataDataProvider *)parserWithFileName:(NSString *)filepath;
 +(SPSocrataDataProvider *)parserWithString:(NSString *)data;

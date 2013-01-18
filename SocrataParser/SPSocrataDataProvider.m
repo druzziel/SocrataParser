@@ -46,29 +46,21 @@
     // self.rawDict[@"meta"][@"view"][@"columns"] is an array of dictionaries
     // each dict has a "name" key that we'll use for the key in self.columns
     NSArray *tmpColumns = self.rawDict[@"meta"][@"view"][@"columns"];
-    int metaDataCount = 0;
-    NSNumber *zero = [NSNumber numberWithInt:0];
+    
+    NSMutableDictionary *colsDictionary = [[NSMutableDictionary alloc] initWithCapacity:[tmpColumns count]];
+    NSInteger positionCounter = 1;
+
     for (NSDictionary *colDict in tmpColumns) {
-        NSNumber *position = colDict[@"position"];
-        if ([position isEqualToNumber:zero]) {
-            metaDataCount++;
-        }
-    }
-        
-    self.metadataColumnCount = [NSNumber numberWithInt:metaDataCount];
-        
-    NSMutableDictionary *colsDictionary = [[NSMutableDictionary alloc] initWithCapacity:([tmpColumns count]) - metaDataCount];
-    for (NSDictionary *colDict in tmpColumns) {
-        NSNumber *position = colDict[@"position"];
-        if (![position isEqualToNumber:zero]) {
-            //TODO:this is an invalid assumption: the first column's position may not == 1.
-            // we need to add each colDict to the colsArray and then sort colsArray by position.
-            //[colsArray insertObject:colDict atIndex:position.integerValue-1];
-            colsDictionary[colDict[@"name"]] = colDict;
-        }
+
+        NSMutableDictionary *tmpDict = [NSMutableDictionary dictionaryWithDictionary:colDict];
+        NSNumber *posNumber = [NSNumber numberWithInteger:positionCounter];
+        tmpDict[@"metaPosition"] = posNumber;
+        positionCounter++;
+        colsDictionary[colDict[@"name"]] = [tmpDict copy];
     }
     
     self.columns = colsDictionary;
+    
     
     [colsDictionary release];
     
@@ -120,21 +112,28 @@
     
 }
 
+//
+// return the name of the column at position
+// return nil if position is not found
+//
 -(NSString *)columnNameAtPosition:(NSInteger)position
 {
     for (NSString *name in self.columns) {
         NSDictionary *colValues = self.columns[name];
         if (position == [colValues[@"position"] integerValue])
             return name;
-        else
-            NSLog(@"Returning nil because %lu != %@", position, colValues[@"position"]);
     }
     return nil;
 }
 
+//
+// return an array of dictionaries
+// sorted by the dictionaries' "position" value
+// these values are not guaranteed to be contiguous
+//
 -(NSArray *)columnsByPosition
 {
-    NSSortDescriptor *descriptor = [[[NSSortDescriptor alloc] initWithKey:@"position"  ascending:YES] autorelease];
+    NSSortDescriptor *descriptor = [[[NSSortDescriptor alloc] initWithKey:@"metaPosition"  ascending:YES] autorelease];
     NSArray *colsArray = [NSArray arrayWithArray:[self.columns allValues]];
     NSArray *result = [colsArray sortedArrayUsingDescriptors:[NSArray arrayWithObjects:descriptor,nil]];
 

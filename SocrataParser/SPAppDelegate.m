@@ -38,13 +38,7 @@
         
     NSMutableString *outputString = nil;
 
-//    for (id columnHeader in socrataDataProvider.columns) {
-//        outputString = [NSString stringWithFormat:@"%@\t", columnHeader[@"name"]];
-//        [self.outputTextView insertText:outputString];
-//    }
-    
     [self.outputTextView insertText:@"Type | Address | Latitude | Longitude | Datetime\n"];
-    
     
     for (NSDictionary *row in socrataDataProvider.rows) {
         double datetime = [(NSNumber *)row[@"Datetime"] doubleValue];
@@ -58,17 +52,6 @@
     }
     [self.outputTextView insertText:@"\n"];
     
-//    for (int j=0; j<socrataDataProvider.rows.count;j++)
-//    {
-//        for (int i=0; i<socrataDataProvider.columns.count-1; i++) {
-//            
-//            outputString = [NSString stringWithFormat:@"%@ : %@\n", socrataDataProvider.columns[i][@"name"], socrataDataProvider.rows[j][i] ];
-//            [self.outputTextView insertText:outputString];
-//        }
-//        [self.outputTextView insertText:@"###########################################################\n"];
-//        
-//    }
-
 }
 
 
@@ -81,15 +64,6 @@
 {
     NSLog(@"Finished processing the data!");
 }
-
-
-
-
-
-
-
-
-
 
 
 
