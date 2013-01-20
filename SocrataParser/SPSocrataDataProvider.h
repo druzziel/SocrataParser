@@ -29,9 +29,9 @@
 -(void)fetchData:(NSNumber *)maxRows;
 -(NSString *)columnNameAtPosition:(NSInteger)position;
 -(NSArray *)columnsByPosition;
+-(NSString *)columnReport;
 +(SPSocrataDataProvider *)parserWithDataSetString:(NSString *)dataSetString;
 +(SPSocrataDataProvider *)parserWithFileName:(NSString *)filepath;
-+(SPSocrataDataProvider *)parserWithString:(NSString *)data;
 +(SPSocrataDataProvider *)parserWithData:(NSData *)data;
 
 //+URLStringForServer:dataset:

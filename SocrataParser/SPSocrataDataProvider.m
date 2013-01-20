@@ -140,13 +140,28 @@
     return result;
 }
 
-#pragma mark Initializers
+#pragma mark Metadata Information
 
-+parserWithString:(NSString *)data
+-(NSString *)columnReport
 {
-    // do stuff
-    return [[SPSocrataDataProvider alloc] init];
+    if (!self.columns) {
+        return nil;
+    }
+    
+    NSMutableString *report = [[[NSMutableString alloc] init] autorelease];
+    
+    for (NSDictionary *col in [self columnsByPosition]) {
+        [report appendFormat:@"Name : %@\n", col[@"name"]];
+        [report appendFormat:@"Description : %@\n", col[@"description"]];
+        [report appendFormat:@"Datatype : %@\n", col[@"dataTypeName"]];
+        [report appendFormat:@"Largest value : %@\n", col[@"cachedContents"][@"largest"]];
+        [report appendFormat:@"Smallest value : %@\n", col[@"cachedContents"][@"smallest"]];
+        [report appendString:@"\n"];
+    }
+    return report;
 }
+
+#pragma mark Initializers
 
 //
 // return a parser by fetching the specified data set
@@ -154,6 +169,11 @@
 //
 +(SPSocrataDataProvider *)parserWithDataSetString:(NSString *)dataSetString
 {
+    if (!dataSetString) {
+        NSLog(@"No dataSetString provided");
+        return nil;
+    }
+    
     SPSocrataDataProvider *result = [[[SPSocrataDataProvider alloc] init] autorelease];
     result.dataSetString = dataSetString;
     return result;
@@ -164,7 +184,10 @@
 //
 +(SPSocrataDataProvider *)parserWithFileName:(NSString *)filepath
 {
-    
+    if (!filepath) {
+        NSLog(@"No filepath provided");
+        return nil;
+    }
     
     NSURL *myURL = [[NSBundle mainBundle] URLForResource:filepath withExtension:@"json"];
     NSData *inputData = [NSData dataWithContentsOfURL:myURL];
@@ -182,6 +205,11 @@
 //
 +(SPSocrataDataProvider *)parserWithData:(NSData *)data
 {
+    if (!data) {
+        NSLog(@"No data provided");
+        return nil;
+    }
+    
     NSDictionary *database;
     NSError *error;
     database = [NSJSONSerialization

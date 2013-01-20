@@ -38,6 +38,8 @@
         
     NSMutableString *outputString = nil;
 
+    NSLog(@"Columns Report: \n%@", [socrataDataProvider columnReport]);
+    
     [self.outputTextView insertText:@"Type | Address | Latitude | Longitude | Datetime\n"];
     
     for (NSDictionary *row in socrataDataProvider.rows) {
@@ -51,6 +53,18 @@
         [self.outputTextView insertText:outputString];
     }
     [self.outputTextView insertText:@"\n"];
+    
+}
+
+- (IBAction)reportColumns:(id)sender {
+
+    SPSocrataDataProvider *socrataDataProvider = [SPSocrataDataProvider parserWithDataSetString:[self.dataURLBox stringValue]];
+    
+    socrataDataProvider.delegate = self;
+        
+    [socrataDataProvider fetchData:[NSNumber numberWithInteger:1]];
+    
+    [self.outputTextView insertText:[socrataDataProvider columnReport]];
     
 }
 

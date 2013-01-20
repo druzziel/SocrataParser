@@ -17,6 +17,7 @@
 @property (assign) IBOutlet NSTextField *numRowsBox;
 
 - (IBAction)fetchIt:(id)sender;
+- (IBAction)reportColumns:(id)sender;
 
 
 @end
